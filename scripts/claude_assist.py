@@ -2114,15 +2114,24 @@ def main():
     # --skill mode: launched from Claude Code skill (detached, non-blocking)
     if "--skill" in sys.argv:
         _debug_log("=== SKILL MODE START ===")
+        print("[claude-assist] Detecting terminal window...")
 
         # In ConPTY (Windows Terminal), GetConsoleWindow() returns 0.
         # Walk the process tree to find the terminal window instead.
         terminal_hwnd = _find_terminal_window()
         _debug_log(f"  terminal_hwnd={terminal_hwnd}")
 
+        if terminal_hwnd:
+            title = _get_window_title(terminal_hwnd)
+            print(f"[claude-assist] Terminal found: {title or '(untitled)'}")
+        else:
+            print("[claude-assist] WARNING: No terminal window found. GUI will run in clipboard-only mode.")
+
         # console_pid=0 forces clipboard paste mode (no WriteConsoleInputW)
+        print("[claude-assist] Launching GUI...")
         _debug_log(f"  Launching GUI with hwnd={terminal_hwnd}, pid=0 (clipboard mode)")
         _launch_gui(terminal_hwnd, 0)
+        print("[claude-assist] GUI launched successfully.")
         _debug_log("=== SKILL MODE END (GUI launched) ===")
         sys.exit(0)
 

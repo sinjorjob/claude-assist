@@ -21,14 +21,24 @@ Usage:
 
 from __future__ import annotations
 
-import os
-os.environ.setdefault("PYTHONUTF8", "1")
-
 import ctypes
 import ctypes.wintypes
 import json
+import os
 import subprocess
 import sys
+
+# Fix cp932 encoding errors on Windows terminals (emoji in window titles etc.)
+if sys.stdout and hasattr(sys.stdout, "reconfigure"):
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except Exception:
+        pass
+if sys.stderr and hasattr(sys.stderr, "reconfigure"):
+    try:
+        sys.stderr.reconfigure(errors="replace")
+    except Exception:
+        pass
 import threading
 import time
 import tkinter as tk

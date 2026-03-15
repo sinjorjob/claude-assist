@@ -5,7 +5,7 @@
 #     "Pillow>=10.0.0",
 # ]
 # ///
-"""Claude Code Input - Multi-line Input GUI for Claude Code
+"""Claude Assist - Multi-line Input GUI for Claude Code
 
 A separate GUI window for composing multi-line prompts.
 Launched from a terminal, it remembers that terminal's window handle
@@ -62,7 +62,7 @@ from PIL import Image, ImageGrab
 # ---------------------------------------------------------------------------
 HISTORY_MAX = 50
 TEMPLATE_MAX = 100
-APP_TITLE = "Claude Code Input"
+APP_TITLE = "Claude Assist"
 WINDOW_WIDTH = 720
 WINDOW_HEIGHT = 680
 FONT_FAMILY = "Meiryo UI"
@@ -820,7 +820,7 @@ class ClaudeInputApp(ctk.CTk):
 
         ctk.CTkLabel(
             title_outer,
-            text="  Claude Code Input",
+            text="  Claude Assist",
             font=ctk.CTkFont(family=FONT_FAMILY, size=16, weight="bold"),
             text_color="#FFFFFF",
             anchor="w",
@@ -2172,7 +2172,7 @@ def main():
         safe_title = title.encode("cp932", errors="replace").decode("cp932") if title else ""
         safe_print("")
         safe_print("  ========================================")
-        safe_print("   Claude Code Input GUI launched!")
+        safe_print("   Claude Assist GUI launched!")
         safe_print("   Linked to this terminal.")
         if safe_title:
             safe_print(f"   ({safe_title})")
@@ -2183,7 +2183,7 @@ def main():
     else:
         safe_print("")
         safe_print("  ========================================")
-        safe_print("   Claude Code Input GUI launched!")
+        safe_print("   Claude Assist GUI launched!")
         safe_print("   No terminal detected.")
         safe_print("")
         safe_print("   Please run this command from")

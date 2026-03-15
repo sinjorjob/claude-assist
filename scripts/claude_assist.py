@@ -21,10 +21,12 @@ Usage:
 
 from __future__ import annotations
 
+import os
+os.environ.setdefault("PYTHONUTF8", "1")
+
 import ctypes
 import ctypes.wintypes
 import json
-import os
 import subprocess
 import sys
 import threading

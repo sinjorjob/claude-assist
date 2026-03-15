@@ -28,6 +28,15 @@ import os
 import subprocess
 import sys
 
+# Fix high-DPI rendering issues (blurry/broken text and borders on scaled displays)
+try:
+    ctypes.windll.shcore.SetProcessDpiAwareness(2)  # PROCESS_PER_MONITOR_DPI_AWARE
+except Exception:
+    try:
+        ctypes.windll.user32.SetProcessDPIAware()  # fallback for older Windows
+    except Exception:
+        pass
+
 # Fix cp932 encoding errors on Windows terminals (emoji in window titles etc.)
 if sys.stdout and hasattr(sys.stdout, "reconfigure"):
     try:

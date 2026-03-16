@@ -656,7 +656,10 @@ def _paste_via_clipboard(hwnd: int, text: str) -> bool:
         _keybd(0x11, 0, 0x0002, 0)    # Ctrl up
 
         # Wait for paste to complete, then Enter to submit
-        time.sleep(0.25)
+        # Longer text needs more time for the terminal to process the paste
+        wait = max(0.3, min(2.0, len(clean) / 2000))
+        _debug_log(f"  paste wait: {wait:.2f}s for {len(clean)} chars")
+        time.sleep(wait)
         _keybd(0x0D, 0, 0, 0)         # Enter down
         _keybd(0x0D, 0, 0x0002, 0)    # Enter up
 
